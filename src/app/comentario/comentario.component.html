@@ -1,0 +1,93 @@
+<ng-container
+    *ngTemplateOutlet="visualizarComentarios; context: { comentarios: comentariosLista}"></ng-container>
+
+
+<ng-template #visualizarComentarios let-comentarios="comentarios">
+    <ng-container *ngFor="let comentario of comentarios">
+
+        <div style="border-bottom:  1px solid #c7c7c7; margin-bottom: 60px;">
+            <div class="cabeceraComentario">
+                <div class="infoUsuario">
+                    <div>
+                        <img width="3%" style="border-radius: 50%;"
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="">
+                    </div>
+                    <p>Fredo Gonofredo</p>
+                </div>
+                <div class="fecha">
+                    <p style="font-size: 14px;">{{ comentario.fecha | date : "medium" }}</p>
+                </div>
+            </div>
+            <p style="font-weight: bold;">{{ comentario.mensaje }}</p>
+
+            <!-- Botón para mostrar respuestas -->
+            <button *ngIf="comentario.listaRespuesta && comentario.listaRespuesta.length != null " class="mostrarRespuesta" (click)="toggleRespuestas(comentario)">Mostrar respuestas
+                ({{comentario.listaRespuesta.length}})</button>
+            <!-- Botón para responder al comentario -->
+            <button class="botonResponder" (click)="responderComentario(comentario)">Responder</button>
+            <button class="botonEliminar" (click)="eliminarComentario()">Eliminar</button>
+
+            <!-- Formulario para responder al comentario -->
+            <div *ngIf="comentario.mostrarFormularioRespuesta" style="margin-top: 20px;">
+                <!-- <input type="text" class="form-control" [(ngModel)]="respuestaDesdeElInput" placeholder="Tu respuesta..."> -->
+                <textarea id="texto_area" name="comentario" [(ngModel)]="respuestaDesdeElInput" rows="8" cols="50"
+                    class="form-control" placeholder="Tu respuesta..."></textarea>
+                <button (click)="guardarRespuesta(comentario)">Enviar respuesta</button>
+            </div>
+
+            <div *ngIf="comentario.mostrarRespuestas" style="margin-left: 40px;">
+                <ng-container *ngIf="comentario.listaRespuesta && comentario.listaRespuesta.length > 0">
+                    <ng-container
+                        *ngTemplateOutlet="visualizarRespuestasDeLosComentarios; context: { respuestas: comentario.listaRespuesta }"></ng-container>
+                </ng-container>
+            </div>
+        </div>
+
+    </ng-container>
+</ng-template>
+
+
+<ng-template #visualizarRespuestasDeLosComentarios let-respuestas="respuestas">
+    <ng-container *ngFor="let respuesta of respuestas">
+
+        <div style="margin-top: 40px; margin-bottom: 40px; border-bottom: 1px solid #c7c7c7; margin-left: 30px;">
+
+            <div class="cabeceraComentario">
+                <div class="infoUsuario">
+                    <div>
+                        <img width="3%" style="border-radius: 50%;"
+                            src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="">
+                    </div>
+                    <p style="font-size: 14px;">Fredo Gonofredo</p>
+                </div>
+                <div class="fecha">
+                    <p style="font-size: 14px;">{{ respuesta.fecha | date : "medium" }}</p>
+                </div>
+            </div>
+
+            <p style="font-weight: bold; color: rgb(28, 10, 10);">{{ respuesta.mensaje }}</p>
+
+            <!-- Botón para mostrar respuestas -->
+            <button class="mostrarRespuesta" (click)="toggleRespuestasDelComentario(respuesta)">Mostrar respuestas
+                ({{respuesta.listaRespuesta.length}})</button>
+            <!-- Botón para responder al comentario -->
+            <button class="botonResponder" (click)="responderRespuestas(respuesta)">Responder</button>
+            <button class="botonEliminar" >Eliminar</button>
+
+            <!-- Formulario para responder al comentario -->
+            <div *ngIf="respuesta.mostrarFormularioRespuesta">
+                <!-- <input type="text" [(ngModel)]="respuestaDeLaRespuestaDelComentario" placeholder="Tu respuesta..."> -->
+                <textarea id="texto_area" name="comentario" [(ngModel)]="respuestaDeLaRespuestaDelComentario" rows="8"
+                    cols="50" class="form-control" placeholder="Tu respuesta..."></textarea>
+                <button (click)="guardarRespuestaDelComen(respuesta)">Enviar respuesta</button>
+            </div>
+            <div *ngIf="respuesta.mostrarRespuestas" style="margin-left: 20px;">
+                <ng-container *ngIf="respuesta.listaRespuesta && respuesta.listaRespuesta.length > 0">
+                    <ng-container
+                        *ngTemplateOutlet="visualizarRespuestasDeLosComentarios; context: { respuestas: respuesta.listaRespuesta }"></ng-container>
+                </ng-container>
+            </div>
+        </div>
+
+    </ng-container>
+</ng-template>

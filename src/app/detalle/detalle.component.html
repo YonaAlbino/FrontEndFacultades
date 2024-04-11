@@ -1,0 +1,70 @@
+<div class="contenedor-global container">
+    <div class="titulo">
+        <h1>{{ universidad.nombre }}</h1>
+    </div>
+
+    <div class="contenedor-cabecera container">
+        <div class="contenedor-imagen">
+            <img src="{{ universidad.imagen }}" alt="" />
+        </div>
+
+        <div class="contenedor-descripcion">
+            <div>
+                <p *ngIf="universidad.listaCalificacion && universidad.listaCalificacion.length > 0">
+                    <span style="margin: auto">
+                        <!-- Envio la lista de calificaciones por cada universidad -->
+                        <app-promedio-calificacion
+                            [listaCalificacion]="universidad.listaCalificacion"></app-promedio-calificacion>
+                    </span>
+                </p>
+                <p>
+                    Sitio web:
+                    <a href="{{ universidad.direccionWeb }}">{{ universidad.direccionWeb }}</a>
+                </p>
+                <p>{{ universidad.descripcion }}</p>
+                <p>Dirección: {{ universidad.direccion }}</p>
+                <p>Puntuar:</p>
+                <app-puntuacion (calificacionGuardada)="handleCalificacionGuardada($event)"></app-puntuacion>
+            </div>
+            <div class="col-md-6" style="margin: auto;">
+                <label for="selectCarrera" class="form-label">Lista de carreras</label>
+                <select id="selectCarrera" class="form-select" (change)="mostrarDatosCarrera($event)">
+                    <option value="Lista de carreras" disabled selected>Carreras</option>
+                    <option *ngFor="let carrera of listaCarreras" [value]="carrera.id">{{carrera.nombre}}
+                    </option>
+                </select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <input type="checkbox" [(ngModel)]="isChecked"> ¿Eliminar universidad?
+                <input type="submit" [disabled]="!isChecked" value="Eliminar universidad" class="btn btn-danger"
+                    (click)="eliminarUniversidad(universidad.id) " id="" style="width: 200px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- componente para ver los detalles de cada carrera -->
+    <app-carrera *ngIf="mostrarCarreraComponent" [carrera]="carreraDeCarreraComponent"></app-carrera>
+
+
+    <div *ngIf="!mostrarCarreraComponent">
+
+        <app-comentario *ngIf="universidad.listaComentarios"
+            [comentariosLista]="universidad.listaComentarios"></app-comentario>
+
+        <div class="agregarComentario container" id="agregarComentario">
+            <div class="cabecera">
+                <h2>Deja un comentario asdddddd</h2>
+                <p>Conectado como.....</p>
+            </div>
+            <div class="contenedorMensaje col-12">
+                <textarea id="texto_area" name="comentario" rows="8" cols="50" class="form-control"
+                    [(ngModel)]="nuevoComentario" placeholder="Escribe aquí..."></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Enviar comentario" (click)="agregarNuevoComentario(nuevoComentario)" />
+        </div>
+    </div>
+
+    <!-- <ng-container *ngTemplateOutlet="mostrarRespuestas; context: { respuestas: listaDeRespuestas}">
+    </ng-container> -->
+</div>

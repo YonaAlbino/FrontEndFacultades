@@ -1,0 +1,18 @@
+.contenedorPromedio{
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedorEstrellas{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.contenedorPuntaje{
+    display: flex;
+}
+
+.contenedorPuntaje P:nth-child(1){
+    margin-right: 20px;
+}

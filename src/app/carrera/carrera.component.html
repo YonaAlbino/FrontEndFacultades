@@ -1,0 +1,33 @@
+<div class="contenedorCarrera container">
+    <div class="nombreCarrera">
+        <p>
+            {{carrera.nombre}}
+        </p>
+    </div>
+    <div class="gradoDuracionCarrera">
+        <p>Grado: {{carrera.grado}}</p>
+        <p>Duración: {{carrera.duracion}}</p>
+    </div>
+    <div class="promedio" *ngIf="carrera.listaCalificacion">
+        <app-promedio-calificacion *ngIf="carrera.listaCalificacion.length > 0"
+            [listaCalificacion]="carrera.listaCalificacion"></app-promedio-calificacion>
+    </div>
+    <div class="puntuacion">
+        <app-puntuacion (calificacionGuardada)="handleCalificacionGuardada($event)"></app-puntuacion>
+    </div>
+</div>
+
+
+<app-comentario *ngIf="carrera.listaComentarios" [comentariosLista]="carrera.listaComentarios"></app-comentario>
+
+<div class="agregarComentario container" id="agregarComentario">
+    <div class="cabecera">
+        <h2>Deja un comentario sobre {{carrera.nombre}}</h2>
+        <p>Conectado como.....</p>
+    </div>
+    <div class="contenedorMensaje col-12">
+        <textarea id="texto_area" name="comentario" [(ngModel)]="comentario" rows="8" cols="50" class="form-control"
+            placeholder="Escribe aquí..."></textarea>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Enviar" (click)="guardarComentario(comentario)" />
+</div>

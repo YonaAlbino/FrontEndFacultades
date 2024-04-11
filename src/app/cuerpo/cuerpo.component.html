@@ -1,0 +1,33 @@
+<app-carrusel></app-carrusel>
+<app-barra-de-busqueda></app-barra-de-busqueda>
+
+<div class="container contenedor-universidades">
+
+  <div class="card" style="width: 18rem; margin-bottom: 20px;" *ngFor="let universidad of universidades">
+    <div class="imagen">
+      <img src="{{universidad.imagen}}" class="card-img-top" alt="...">
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{universidad.nombre}}</h5>
+      <p class="card-text">{{universidad.descripcion}}</p>
+      <a class="card-text" href="{{universidad.direccionWeb}}">{{universidad.direccionWeb}}</a>
+      <p class="card-text">{{universidad.direccion}}</p>
+
+      <p *ngIf="universidad.listaCalificacion && universidad.listaCalificacion.length > 0">
+
+        <span style="margin: auto;">
+          <!-- Envio la lista de calificaciones por cada universidad -->
+          <app-promedio-calificacion [listaCalificacion]="universidad.listaCalificacion"></app-promedio-calificacion>
+        </span>
+      </p>
+
+
+      <a [routerLink]="['/detalle', universidad.id]" class="btn btn-primary">Ver</a>
+      <a [routerLink]="['/agregarInstitucion', universidad.id]" class="btn btn-primary">Editar</a>
+      
+    </div>
+
+  </div>
+
+</div>
+<app-footer></app-footer>

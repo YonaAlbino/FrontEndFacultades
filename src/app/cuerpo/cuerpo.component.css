@@ -1,0 +1,14 @@
+.contenedor-universidades{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Esta línea hace que los elementos se envuelvan cuando no hay espacio */
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.card .imagen{
+    height: 250px;
+}
+
