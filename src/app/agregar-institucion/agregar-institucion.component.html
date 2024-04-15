@@ -8,49 +8,76 @@
             <label for="inputEmail4" class="form-label">Nombre</label>
             <input type="tel" class="form-control" id="1" name="nombre" placeholder="Nombre de la institución"
                 [(ngModel)]="nombre">
+
+            <div class="alert alert-danger mt-2" *ngIf="!nombre || nombre.length < 4">
+                El nombre es obligatorio y debe ser mayor a 3 caracteres
+            </div>
+
         </div>
         <div class="col-md-6">
             <label for="inputPassword4" class="form-label">Dirección web</label>
             <input type="text" class="form-control" id="2" name="direccion web" placeholder="Dirección web"
                 [(ngModel)]="direccionWeb">
+
+            <div class="alert alert-danger mt-2" *ngIf="!direccionWeb || direccionWeb.length < 8">
+                La dirección web es obligatoria y debe ser mayor a 7 caracteres
+            </div>
+
         </div>
         <div class="col-md-6">
             <label for="inputAddress" class="form-label">Dirección</label>
             <input type="text" class="form-control" id="3" name="direccion" placeholder="Posadas/Misiones/Argentina"
                 [(ngModel)]="direccion">
+
+            <div class="alert alert-danger mt-2" *ngIf="!direccion || direccion.length < 8">
+                La dirección es obligatoria y debe ser mayor a 7 caracteres
+            </div>
+
         </div>
         <div class="col-md-6">
             <P style="margin: 0px;">Puntuar:</P>
+            <!-- Controlar que la calificacion sea guardada luego de haber creado una universidad -->
             <app-puntuacion (calificacionGuardada)="handleCalificacionGuardada($event)"></app-puntuacion>
         </div>
         <div class="col-12">
             <label for="inputAddress2" class="form-label">Descripción</label>
             <textarea id="texto_area" name="descripcion" rows="4" cols="50" class="form-control"
                 [(ngModel)]="descripcion"></textarea>
+
+            <div class="alert alert-danger mt-2" *ngIf="!descripcion || descripcion.length < 10">
+                La descripción es obligatoria y debe tener al menos 10 caracteres
+            </div>
+
         </div>
         <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Agregar una carrera a la universidad</label>
             <div style="display: flex; ">
-                <input type="text" class="form-control" id="" [(ngModel)]="nombreCarrera" name="nombreCarreraUniversdiad"
-                    placeholder="Nombre de la carrera">
+                <input type="text" class="form-control" id="" [(ngModel)]="nombreCarrera"
+                    name="nombreCarreraUniversdiad" placeholder="Nombre de la carrera">
                 <input type="text" class="form-control" id="" [(ngModel)]="gradoCarrera" name="gradoCarreraUniversidad"
                     placeholder="Grado">
-                <input type="text" class="form-control" id="" [(ngModel)]="duracionCarrera" name="duracionCarreraUnivers"
-                    placeholder="Duración">
-                <input type="submit" value="Agregar carrera" id="" class="btn btn-primary" (click)="crearCarrera()">
+                <input type="text" class="form-control" id="" [(ngModel)]="duracionCarrera"
+                    name="duracionCarreraUnivers" placeholder="Duración">
+                <input type="submit" value="Agregar carrera" id="" class="btn btn-primary"
+                    [disabled]="!nombreCarrera || !gradoCarrera || !duracionCarrera" (click)="crearCarrera()">
             </div>
-            
+
         </div>
         <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Lista de carreras</label>
-            <select class="form-select" [(ngModel)]="carreraSeleccionada" name="selectDeLascarreras" (change)="retornarPropiedadActiva()">
+            <select class="form-select" [(ngModel)]="carreraSeleccionada" name="selectDeLascarreras"
+                (change)="retornarPropiedadActiva()">
                 <option value="" disabled selected>Carreras</option>
                 <!-- <option *ngFor="let carrera of listaCarreras"  [ngValue]="carrera" [style.color]="carrera.activa ? 'black' : ' #ff0000'">{{carrera.nombre}}</option> -->
-                <option *ngFor="let carrera of listaCarreras" [ngValue]="carrera" [style.color]="carrera.activa ? 'green' : '#ff0000'" [style.font-weight]="'bold'">{{carrera.nombre}}</option>
+                <option *ngFor="let carrera of listaCarreras" [ngValue]="carrera"
+                    [style.color]="carrera.activa ? 'green' : '#ff0000'" [style.font-weight]="'bold'">{{carrera.nombre}}
+                </option>
 
             </select>
-            <input type="submit" class="btn btn-danger" value="Eliminar carrera" (click)="eliminarCarreraSeleccionada()" [disabled]="!propiedadActivaCarrera">
-            <input type="submit" class="btn btn-success" value="Reactivar carrera" (click)="reactivarCarreraSeleccionada()" [disabled]="propiedadActivaCarrera">
+            <input type="submit" class="btn btn-danger" value="Eliminar carrera" (click)="eliminarCarreraSeleccionada()"
+                [disabled]="!propiedadActivaCarrera">
+            <input type="submit" class="btn btn-success" value="Reactivar carrera"
+                (click)="reactivarCarreraSeleccionada()" [disabled]="propiedadActivaCarrera">
         </div>
 
         <div class="col-12">
@@ -58,12 +85,19 @@
             <input type="text" class="form-control" id="4" name="imagen"
                 placeholder="Ingresa la dirección URL de la imagen" (input)="cargarImagenAlTeclear($event)"
                 [(ngModel)]="imagen">
+
+            <div class="alert alert-danger mt-2" *ngIf="!imagen ">
+                NO te olvides de la imagen 
+            </div>
+
             <div class="contenedor-imagen">
-                <img src="{{imagenUrl}}" alt="Descripción de la imagen" class="image" (error)="errorCargaImagen($event)">
+                <img src="{{imagenUrl}}" alt="Descripción de la imagen" class="image"
+                    (error)="errorCargaImagen($event)" >
             </div>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-primary" (click)="agregar()">Aceptar</button>
+            <button type="submit" class="btn btn-primary" (click)="agregar()"
+                [disabled]="validacionFormulario()">Aceptar</button>
         </div>
 
     </form>

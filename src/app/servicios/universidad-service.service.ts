@@ -51,4 +51,8 @@ export class UniversidadServiceService {
   }
 
 
+  obtenerUniversidadesPaginadas(pagina:number, tamanio:number):Observable<Universidad[]>{
+    return this.HttpClient.get<Universidad[]>(`${this.urlBase}/universidad/paginadas?pagina=${pagina}&tamanio=${tamanio}`);
+  }
+
 }

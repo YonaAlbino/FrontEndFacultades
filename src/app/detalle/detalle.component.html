@@ -54,14 +54,15 @@
 
         <div class="agregarComentario container" id="agregarComentario">
             <div class="cabecera">
-                <h2>Deja un comentario asdddddd</h2>
+                <h2>Deja un comentario</h2>
                 <p>Conectado como.....</p>
             </div>
             <div class="contenedorMensaje col-12">
                 <textarea id="texto_area" name="comentario" rows="8" cols="50" class="form-control"
                     [(ngModel)]="nuevoComentario" placeholder="Escribe aquí..."></textarea>
             </div>
-            <input type="submit" class="btn btn-primary" value="Enviar comentario" (click)="agregarNuevoComentario(nuevoComentario)" />
+            <input type="submit" class="btn btn-primary" value="Enviar comentario"
+                (click)="agregarNuevoComentario(nuevoComentario)" />
         </div>
     </div>
 

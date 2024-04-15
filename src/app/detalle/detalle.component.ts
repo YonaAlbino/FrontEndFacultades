@@ -1,5 +1,4 @@
 
-
 import { Universidad } from './../modelo/universidad';
 
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +13,8 @@ import { Respuesta } from '../modelo/respuesta';
 import { RespuestaService } from '../servicios/respuesta.service';
 import { CarreraService } from '../servicios/carrera.service';
 import { CarreraComponent } from '../carrera/carrera.component';
+import { AlertasService } from '../servicios/alertas.service';
+
 
 
 @Component({
@@ -43,7 +44,9 @@ export class DetalleComponent implements OnInit {
   isChecked: boolean = false;
 
 
-  constructor(private uniService: UniversidadServiceService, private route: ActivatedRoute, private comentarioService: ComentarioService, private respuetaService: RespuestaService, private router: Router, private carreraService: CarreraService) { }
+
+  constructor(private uniService: UniversidadServiceService, private route: ActivatedRoute, private comentarioService: ComentarioService, private respuetaService: RespuestaService, private router: Router, private carreraService: CarreraService, private alertas:AlertasService) { }
+
 
   ngOnInit(): void {
     this.idUniversidad = this.route.snapshot.params["id"];
@@ -111,9 +114,7 @@ export class DetalleComponent implements OnInit {
 
 
   eliminarUniversidad(idUniversidad: number) {
-    this.uniService.eliminarUniversidad(idUniversidad).subscribe(() => {
-      this.router.navigate([""]);
-    });
+    this.alertas.alertaEliminacionUniversidad(idUniversidad);
   }
 
   mostrarDatosCarrera(event: any) {
@@ -126,9 +127,7 @@ export class DetalleComponent implements OnInit {
       }),
         (error: any) => {
           console.error('Error al buscar la carrera:', error);
-          // Aquí puedes agregar el código para manejar el error, como mostrar un mensaje al usuario
         }
-      // Hacer lo que necesites con el ID de la carrera seleccionada
     }
   }
 

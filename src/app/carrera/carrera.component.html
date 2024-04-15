@@ -1,3 +1,5 @@
+
+
 <div class="contenedorCarrera container">
     <div class="nombreCarrera">
         <p>
@@ -20,9 +22,11 @@
 
 <app-comentario *ngIf="carrera.listaComentarios" [comentariosLista]="carrera.listaComentarios"></app-comentario>
 
+
 <div class="agregarComentario container" id="agregarComentario">
     <div class="cabecera">
         <h2>Deja un comentario sobre {{carrera.nombre}}</h2>
+
         <p>Conectado como.....</p>
     </div>
     <div class="contenedorMensaje col-12">
@@ -31,3 +35,5 @@
     </div>
     <input type="submit" class="btn btn-primary" value="Enviar" (click)="guardarComentario(comentario)" />
 </div>
+
+

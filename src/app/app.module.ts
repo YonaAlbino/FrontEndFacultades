@@ -15,13 +15,15 @@ import { AgregarInstitucionComponent } from './agregar-institucion/agregar-insti
 import { ContactoComponent } from './contacto/contacto.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoguinComponent } from './loguin/loguin.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { PuntuacionComponent } from './puntuacion/puntuacion.component';
 import { DetalleComponent } from './detalle/detalle.component';
 import { PromedioCalificacionComponent } from './promedio-calificacion/promedio-calificacion.component';
 import { CarreraComponent } from './carrera/carrera.component';
 import { ComentarioComponent } from './comentario/comentario.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -64,7 +66,11 @@ const appRoutes:Routes=[
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

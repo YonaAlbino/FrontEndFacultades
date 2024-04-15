@@ -1,4 +1,3 @@
-
 import { CarreraService } from './../servicios/carrera.service';
 import { Carrera } from './../modelo/carrera';
 import { Universidad } from '../modelo/universidad';
@@ -10,6 +9,8 @@ import { UniversidadServiceService } from '../servicios/universidad-service.serv
 import { Comentario } from '../modelo/comentario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComentarioService } from '../servicios/comentario.service';
+import { AlertasService } from '../servicios/alertas.service';
+
 
 
 
@@ -19,13 +20,12 @@ import { ComentarioService } from '../servicios/comentario.service';
   styleUrls: ['./agregar-institucion.component.css']
 })
 export class AgregarInstitucionComponent implements OnInit {
+  constructor(private servicioCalificaciones: ServicioCalificacionesService, private universidadService: UniversidadServiceService, private router: Router, private servicioComentario: ComentarioService, private carreraService: CarreraService, private route: ActivatedRoute, private alertas: AlertasService) { }
 
-  constructor(private servicioCalificaciones: ServicioCalificacionesService, private universidadService: UniversidadServiceService, private router: Router, private servicioComentario: ComentarioService, private carreraService: CarreraService, private route: ActivatedRoute) { }
-
-
+  // imagenCargadaCorrectamente: boolean = false;
   imagenUrl: String = "";
   private calificacionUniversidad: number = 0.0;
-  comentario: string = "";
+  // comentario: string = "";
   nombre: string = "";
   imagen: string = "";
   direccion: string = "";
@@ -41,6 +41,8 @@ export class AgregarInstitucionComponent implements OnInit {
   idDeUniversidadEditada: number = 0;
   carreraSeleccionada: Carrera;
   propiedadActivaCarrera: boolean;
+
+
 
 
   cargarImagenAlTeclear(event: Event) {
@@ -100,12 +102,12 @@ export class AgregarInstitucionComponent implements OnInit {
     universidad.setListaCarreras(this.listaCarreras);
     universidad.setListaComentarios(this.listaComentarios);
     universidad.setListaCalificacion(this.listaCalificaciones);
-
     if (this.idUniversidad) {
       //console.log(universidad);
       universidad.id = this.idDeUniversidadEditada;
       this.universidadService.actualizarUniversidad(universidad).subscribe((universidad: Universidad) => {
         this.router.navigate([""]);
+        this.alertas.alertaTrabajoRealizado();
       },
         (error) => {
           console.error(error);
@@ -113,6 +115,7 @@ export class AgregarInstitucionComponent implements OnInit {
     } else {
       this.guardarUniversidad(universidad).subscribe(() => {
         this.router.navigate([""]);
+        this.alertas.alertaTrabajoRealizado();
       });
     }
 
@@ -129,6 +132,10 @@ export class AgregarInstitucionComponent implements OnInit {
     carrera.duracion = this.duracionCarrera;
     this.carreraService.saveCarrera(carrera).subscribe((carreraGuardada: Carrera) => {
       this.listaCarreras?.push(carreraGuardada);
+      this.nombreCarrera = "";
+      this.gradoCarrera = "";
+      this.duracionCarrera = "";
+      this.alertas.alertaExitoComun("Carrera guardada!");
     },
       (error) => {
         console.error('Error al guardar la carrera:', error);
@@ -136,21 +143,28 @@ export class AgregarInstitucionComponent implements OnInit {
     );
   }
 
+
   handleCalificacionGuardada(calificacion: Calificacion) {
     this.listaCalificaciones = []; // Vacía la lista
     this.listaCalificaciones.push(calificacion);
+    this.alertas.alertaMensajeExito("Calificada!");
   }
+
+
 
   errorCargaImagen(event: any) {
     event.preventDefault();
     this.cargarImagenPorDefecto();
   }
 
+
+
   eliminarCarreraSeleccionada() {
     if (this.carreraSeleccionada) {
       this.carreraSeleccionada.activa = false;
       this.carreraService.actualizarCarrera(this.carreraSeleccionada).subscribe((carrera: Carrera) => {
         console.log(carrera);
+        this.alertas.alertaExitoComun("Carrera eliminada!")
       }, (error) => {
         console.error(error);
       })
@@ -166,10 +180,21 @@ export class AgregarInstitucionComponent implements OnInit {
       this.carreraSeleccionada.activa = true;
       this.carreraService.actualizarCarrera(this.carreraSeleccionada).subscribe((carrera: Carrera) => {
         console.log(carrera);
+        this.alertas.alertaExitoComun("Carrera reactivada!");
       }, (error) => {
         console.error(error);
       })
     }
   }
+
+  validacionFormulario(): boolean {
+    if (this.nombre && this.nombre.length >= 4 && this.imagen && this.descripcion && this.descripcion.length > 9 && this.direccion && this.direccion.length > 8 && this.direccionWeb && this.direccionWeb.length > 8 ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
 
 }

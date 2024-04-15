@@ -1,2 +1,67 @@
-<p>contacto works!</p>
+<form [formGroup]="formContacto" class="container col-md-6" style="margin-top: 50px; margin-bottom: 50px"
+    (ngSubmit)="enviar()">
+    <div class="mb-3 row">
+        <div class="mb-3 col-md-6">
+            <label for="exampleInputEmail1" class="form-label">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control" id="exampleInputEmail1"
+                placeholder="Ingresa tu nombre" aria-describedby="emailHelp" />
+
+            <div class="alert alert-danger mt-2" [hidden]="nombre.valid || nombre.pristine">
+                El nombre es obligatorio
+            </div>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="exampleInputEmail1" class="form-label">Apellido</label>
+            <input type="email" formControlName="apellido" class="form-control" id="exampleInputEmail1"
+                placeholder="Ingresa tu apellido" aria-describedby="emailHelp" />
+
+            <div class="alert alert-danger mt-2" [hidden]="apellido.valid || nombre.pristine">
+                El apellido es obligatorio
+            </div>
+
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <div class="mb-3 col-md-6">
+            <label for="exampleInputEmail1" class="form-label">Direccion de correo
+            </label>
+            <input type="email" class="form-control" formControlName="correo" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Dirección de correo electronico" />
+        </div>
+
+        <div class="alert alert-danger mt-2" [hidden]="correo.valid || correo.pristine">
+            <span *ngIf="correo.errors?.['required']">
+                El correo es obligatorio
+            </span>
+
+            <span *ngIf="correo.errors?.['email']"> El correo debe ser valido </span>
+        </div>
+
+
+        <div class="mb-3 col-md-6">
+            <label for="exampleInputEmail1" class="form-label">Asunto
+            </label>
+            <input type="text" class="form-control" formControlName="asunto" id="exampleInputAsunto"
+                aria-describedby="emailHelp" placeholder="Asunto" />
+        </div>
+
+        <div class="alert alert-danger mt-2" [hidden]="asunto.valid || asunto.pristine">
+            El asunto es obligatorio
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Mensaje</label>
+        <textarea id="texto_area" id="exampleInputEmail1" formControlName="mensaje" aria-describedby="emailHelp"
+            rows="8" cols="50" class="form-control" placeholder="Tu mensaje..."></textarea>
+
+        <div class="alert alert-danger mt-2" [hidden]="mensaje.valid || nombre.pristine ">
+            El mensaje es obligatorio
+        </div>
+
+    </div>
+    <button [disabled]="formContacto.invalid" type="submit" class="btn btn-primary">
+        Enviar
+    </button>
+</form>
+
 <app-footer></app-footer>

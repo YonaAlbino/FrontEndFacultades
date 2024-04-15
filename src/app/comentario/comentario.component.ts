@@ -28,6 +28,8 @@ throw new Error('Method not implemented.');
   //@Input() carrera: Carrera = new Carrera();
   @Input() comentariosLista:Comentario[];
 
+
+
   ngOnInit(): void {
     if (this.comentariosLista)
       this.listaComentarios = this.comentariosLista;

@@ -1,6 +1,5 @@
 <app-carrusel></app-carrusel>
 <app-barra-de-busqueda></app-barra-de-busqueda>
-
 <div class="container contenedor-universidades">
 
   <div class="card" style="width: 18rem; margin-bottom: 20px;" *ngFor="let universidad of universidades">
@@ -24,10 +23,46 @@
 
       <a [routerLink]="['/detalle', universidad.id]" class="btn btn-primary">Ver</a>
       <a [routerLink]="['/agregarInstitucion', universidad.id]" class="btn btn-primary">Editar</a>
-      
+
     </div>
 
   </div>
 
 </div>
+
+<div style="width: 100%;  display: flex; justify-content: center;">
+  <div class="pagination">
+    <div>
+      <ul style="display: flex; list-style: none; ">
+        <li class="page-item" [class.disabled]="paginaActual === 0">
+          <a class="page-link" (click)="cambiarPagina(paginaActual - 1)" aria-label="Anterior">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="cambiarPagina(0)">
+            1</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link">
+            {{paginaActual + 1}}</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" (click)="cambiarPagina(cantidadPaginas - 1 )">
+            {{cantidadPaginas  }}</a>
+        </li>
+
+        <li class="page-item" [class.disabled]="paginaActual + 1 ===  cantidadPaginas  ">
+          <a class="page-link" (click)="cambiarPagina(paginaActual + 1)" aria-label="Siguiente">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
 <app-footer></app-footer>
