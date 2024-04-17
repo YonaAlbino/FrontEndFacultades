@@ -136,6 +136,7 @@ export class DetalleComponent implements OnInit {
       (comentario: Comentario) => {
         comentario.listaRespuesta = [];
         this.universidad.listaComentarios?.push(comentario);
+        console.log(comentario)
         this.uniService.actualizarUniversidad(this.universidad).subscribe((universidad: Universidad) => {
           this.universidad = universidad;
         });

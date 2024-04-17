@@ -1,0 +1,48 @@
+<h2 style="text-align: center;">Top universidades</h2>
+<!-- <div class="card" style="width: 18rem; margin-bottom: 20px; border: 1px solid rebeccapurple; margin: auto;" *ngFor="let universidad of listaTopUniversidades">
+    <!-- <div class="imagen">
+        <img src="{{universidad.imagen}}" class="card-img-top" alt="...">
+    </div> 
+    <div class="card-body">
+        <h5 class="card-title" style="font-weight: bold; font-size: 22px; text-align: center;">{{universidad.nombre}}</h5>
+        <!-- <p class="card-text">{{universidad.descripcion}}</p> -->
+<!-- <a class="card-text" href="{{universidad.direccionWeb}}">{{universidad.direccionWeb}}</a> -->
+<!-- <p class="card-text">{{universidad.direccion}}</p> 
+
+        <p *ngIf="universidad.listaCalificacion && universidad.listaCalificacion.length > 0">
+
+            <span style="margin: auto;">
+                <!-- Envio la lista de calificaciones por cada universidad 
+                <app-promedio-calificacion
+                    [listaCalificacion]="universidad.listaCalificacion"></app-promedio-calificacion>
+            </span>
+        </p>
+
+
+       <div style="display: flex; justify-content: center;">
+        <a style="margin-right: 10px;" [routerLink]="['/detalle', universidad.id]" class="btn btn-primary">Ver</a>
+       </div>
+
+    </div>
+
+</div> -->
+
+
+<table class="table" style="border: 1px solid;">
+    <tbody>
+        <tr *ngFor="let universidad of listaTopUniversidades; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+                <a style="text-decoration: none; color: black; font-weight: bold;"
+                    [routerLink]="['/detalle', universidad.id]">{{ universidad.nombre }}</a>
+            </td>
+            <td>
+                <p *ngIf="universidad.listaCalificacion && universidad.listaCalificacion.length > 0">
+                    <app-promedio-calificacion
+                        [listaCalificacion]="universidad.listaCalificacion"></app-promedio-calificacion>
+                </p>
+            </td>
+        </tr>
+    </tbody>
+        <input type="submit" style="background-color: white; border: none;" value="Cargar mas" (click)="cargarMasUniversidades()" [disabled]="listaTopUniversidades.length < registrosPorPagina">
+</table>

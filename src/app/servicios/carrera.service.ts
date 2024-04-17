@@ -52,6 +52,12 @@ export class CarreraService {
     const url = `${this.urlBase}/universidad/eliminar?id=${id}`;
     return this.HttpClient.delete(url, { responseType: 'text' });
   }
-  
+
+
+  public obtenerTopCarreras(pagina:number, tamanio:number):Observable<Carrera[]>{
+    return this.HttpClient.get<Carrera[]>(`${this.urlBase}/carrera/obtenerTopCarreras?pagina=${pagina}&tamanio=${tamanio}`);
+  }
+
+
 
 }

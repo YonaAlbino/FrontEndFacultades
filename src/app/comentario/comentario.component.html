@@ -1,11 +1,21 @@
+<div class="container">
+    <div style=" text-align: center; margin-top: 20px; margin-bottom: 20px;">
+        <h1 style="font-weight: bold;">Comentarios</h1>
+    </div>
+    <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+        <input type="submit" class="btn btn-primary" value="Más recientes" (click)="traerComentariosMasRecientes()">
+        <input type="submit" class="btn btn-primary" value="Más antiguos" (click)="traerComentariosMasAntiguos()">
+        <input type="submit" class="btn btn-warning" value="Ocultar" (click)="ocultarComentarios()">
+    </div>
+</div>
+
 <ng-container
-    *ngTemplateOutlet="visualizarComentarios; context: { comentarios: comentariosLista}"></ng-container>
+    *ngTemplateOutlet="visualizarComentarios; context: { comentarios: listaComentarios}"></ng-container>
 
-
-<ng-template #visualizarComentarios let-comentarios="comentarios">
+<ng-template  #visualizarComentarios let-comentarios="comentarios">
     <ng-container *ngFor="let comentario of comentarios">
 
-        <div style="border-bottom:  1px solid #c7c7c7; margin-bottom: 60px;">
+        <div style="border-bottom:  1px solid #c7c7c7; margin-bottom: 60px;" *ngIf="verComentarios">
             <div class="cabeceraComentario">
                 <div class="infoUsuario">
                     <div>

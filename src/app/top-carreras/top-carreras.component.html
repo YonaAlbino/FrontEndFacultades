@@ -1,0 +1,19 @@
+<h2 style="text-align: center;">Top Carreras</h2>
+<table class="table" style="border: 1px solid;">
+    <tbody>
+        <tr *ngFor="let carrera of listaTopCarreras; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+                <a style="text-decoration: none; color: black; font-weight: bold;"
+                    [routerLink]="['/detalle', carrera.id]">{{ carrera.nombre }}</a>
+            </td>
+            <td>
+                <p *ngIf="carrera.listaCalificacion && carrera.listaCalificacion.length > 0">
+                    <app-promedio-calificacion
+                        [listaCalificacion]="carrera.listaCalificacion"></app-promedio-calificacion>
+                </p>
+            </td>
+        </tr>
+    </tbody>
+        <input type="submit" style="background-color: white; border: none;" value="Cargar mas" (click)="cargarMasCarreras()" [disabled]="listaTopCarreras.length < registrosPorPagina">
+</table>

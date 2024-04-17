@@ -37,8 +37,8 @@ export class UniversidadServiceService {
     return this.HttpClient.get<Universidad[]>(this.urlBase + "/universidad/traer/todas");
   }
 
-  public obtenerPrimerasTresImagenes():Observable<Universidad[]>{
-    return this.HttpClient.get<Universidad[]>(this.urlBase + "/universidad/primerasTresImagenes");
+  public obtenerTopUniversidades(pagina:number, tamanio:number):Observable<Universidad[]>{
+    return this.HttpClient.get<Universidad[]>(`${this.urlBase}/universidad/obtenerTopUniversidades?pagina=${pagina}&tamanio=${tamanio}`);
   }
 
   public buscarUniversdiad(id: number): Observable<any> {

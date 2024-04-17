@@ -13,16 +13,19 @@ export class CarruselComponent implements OnInit {
   universidades: Universidad[] = new Array(3);
 
 
+
   ngOnInit(): void {
     this.cargarTresPrimerasImagenes();
   }
 
   cargarTresPrimerasImagenes() {
-    this.universidadService.obtenerPrimerasTresImagenes().subscribe((universidades: Universidad[]) => {
+    this.universidadService.obtenerTopUniversidades(0, 3).subscribe((universidades: Universidad[]) => {
       this.universidades = universidades;
       if (this.universidades.length < 3) {
         this.completarCampos(this.universidades);
       }
+
+      console.log(universidades.length)
     },
       (error) => {
         console.error(error);

@@ -24,6 +24,8 @@ import { CarreraComponent } from './carrera/carrera.component';
 import { ComentarioComponent } from './comentario/comentario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TopUniversidadesComponent } from './top-universidades/top-universidades.component';
+import { TopCarrerasComponent } from './top-carreras/top-carreras.component';
 
 
 
@@ -59,6 +61,8 @@ const appRoutes:Routes=[
     PromedioCalificacionComponent,
     CarreraComponent,
     ComentarioComponent,
+    TopUniversidadesComponent,
+    TopCarrerasComponent,
     
   ],
   imports: [

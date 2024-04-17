@@ -8,25 +8,28 @@ import { Carrera } from '../modelo/carrera';
 import { Calificacion } from '../modelo/calificacion';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-comentario',
   templateUrl: './comentario.component.html',
   styleUrls: ['./comentario.component.css']
 })
 export class ComentarioComponent {
-eliminarComentario() {
-throw new Error('Method not implemented.');
-}
+
+  eliminarComentario() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private carreraService: CarreraService, private comentarioService: ComentarioService, private respuestaService: RespuestaService) { }
 
   respuestaDeLaRespuestaDelComentario: string;
   comentario: string;
   respuestaDesdeElInput: string;
-  listaComentarios: Comentario[];
+  listaComentarios: Comentario[] = [];
+  verComentarios:boolean = true;
 
   //@Input() carrera: Carrera = new Carrera();
-  @Input() comentariosLista:Comentario[];
+  @Input() comentariosLista: Comentario[];
 
 
 
@@ -123,4 +126,32 @@ throw new Error('Method not implemented.');
   }
 
 
+  //Metodo para ordenar la lista de comentarios de mas recientes a menos recientes
+  traerComentariosMasRecientes() {
+    // Ordenar la lista de comentarios por fecha de manera descendente
+    this.listaComentarios.sort((a, b) => {
+      const fechaA = new Date(a.fecha);
+      const fechaB = new Date(b.fecha);
+      return fechaB.getTime() - fechaA.getTime();
+    });
+  }
+
+  //Metodo para ordenar la lista de comentarios de mas recientes a menos recientes
+  traerComentariosMasAntiguos() {
+    // Ordenar la lista de comentarios por fecha de manera descendente
+    this.listaComentarios.sort((a, b) => {
+      const fechaA = new Date(a.fecha);
+      const fechaB = new Date(b.fecha);
+      return fechaA.getTime() - fechaB.getTime();
+    });
+  }
+
+  //Metodo para ocultar los comentarios
+  ocultarComentarios() {
+    this.verComentarios = !this.verComentarios;
+  }
+
 }
+
+
+
