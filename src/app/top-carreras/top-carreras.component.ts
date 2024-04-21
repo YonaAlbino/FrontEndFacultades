@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CarreraService } from '../servicios/carrera.service';
 import { Carrera } from '../modelo/carrera';
+import { UniversidadServiceService } from '../servicios/universidad-service.service';
+import { Universidad } from '../modelo/universidad';
 
 @Component({
   selector: 'app-top-carreras',
@@ -8,14 +10,13 @@ import { Carrera } from '../modelo/carrera';
   styleUrls: ['./top-carreras.component.css']
 })
 export class TopCarrerasComponent {
-
-
-  constructor(private carreraService: CarreraService) { }
+  constructor(private carreraService: CarreraService, private universidadService: UniversidadServiceService) { }
 
   listaTopCarreras: Carrera[] = [];
   pagina: number = 0;
-  registrosPorPagina = 4;
-
+  registrosPorPagina = 8;
+  universidad: Universidad = new Universidad();
+  indice:number;
 
   ngOnInit(): void {
     this.cargarCarreras();
@@ -30,8 +31,22 @@ export class TopCarrerasComponent {
   }
 
   cargarMasCarreras() {
-    this.pagina = this.pagina +1;
+    this.pagina = this.pagina + 1;
     this.cargarCarreras();
+  }
+
+  cargarMenosCarrereas(){
+    this.pagina = this.pagina - 1;
+    this.cargarCarreras();
+  }
+
+  buscarUniversdiadPorIdCarrera(carrera:Carrera, index:number) {
+    this.indice = index;
+    this.universidadService.getuniversidadIdCarrera(carrera.id).subscribe((universdiad: Universidad) => {
+      this.universidad = universdiad;
+    }, (error) => {
+      console.error(error);
+    })
   }
 
 

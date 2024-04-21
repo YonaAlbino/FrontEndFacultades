@@ -1,4 +1,4 @@
-<h2 style="text-align: center;">Top universidades</h2>
+<h2 style="text-align: center">Top universidades</h2>
 <!-- <div class="card" style="width: 18rem; margin-bottom: 20px; border: 1px solid rebeccapurple; margin: auto;" *ngFor="let universidad of listaTopUniversidades">
     <!-- <div class="imagen">
         <img src="{{universidad.imagen}}" class="card-img-top" alt="...">
@@ -27,22 +27,27 @@
 
 </div> -->
 
-
-<table class="table" style="border: 1px solid;">
+<table class="table" style="border: 1px solid">
     <tbody>
         <tr *ngFor="let universidad of listaTopUniversidades; let i = index">
             <th scope="row">{{ i + 1 }}</th>
             <td>
-                <a style="text-decoration: none; color: black; font-weight: bold;"
+                <a style="text-decoration: none; color: black; font-weight: bold"
                     [routerLink]="['/detalle', universidad.id]">{{ universidad.nombre }}</a>
             </td>
             <td>
-                <p *ngIf="universidad.listaCalificacion && universidad.listaCalificacion.length > 0">
+                <p *ngIf="
+            universidad.listaCalificacion &&
+            universidad.listaCalificacion.length > 0
+          ">
                     <app-promedio-calificacion
                         [listaCalificacion]="universidad.listaCalificacion"></app-promedio-calificacion>
                 </p>
             </td>
         </tr>
     </tbody>
-        <input type="submit" style="background-color: white; border: none;" value="Cargar mas" (click)="cargarMasUniversidades()" [disabled]="listaTopUniversidades.length < registrosPorPagina">
+    <input type="submit" style="background-color: white; border: none" value="Siguiente"
+        (click)="cargarMasUniversidades()" [disabled]="listaTopUniversidades.length < registrosPorPagina" />
+    <input type="submit" style="background-color: white; border: none" value="Anterior"
+        (click)="cargarMenosUniversidades()" [disabled]="pagina  == 0" />
 </table>

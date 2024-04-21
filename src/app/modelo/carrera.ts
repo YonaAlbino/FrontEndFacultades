@@ -9,4 +9,5 @@ export class Carrera {
     listaCalificacion?: Calificacion[];
     listaComentarios?: Comentario[];
     activa:boolean;
+
 }

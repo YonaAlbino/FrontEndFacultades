@@ -31,6 +31,13 @@ export class ComentarioService {
     });
 
     return this.HttpClient.put(url, comentario, { headers: headers });
+  }
 
+  CargarComentariosPaginadosUniversidad(pagina:number, tamanio:number, idUniversidad:number):Observable<Comentario[]>{
+    return this.HttpClient.get<Comentario[]>(this.urlBase+"/comentario/encontrarComentariosPorIdUniversidad/"+idUniversidad+"?pagina="+pagina+"&tamanio="+tamanio);
+  }
+
+  CargarComentariosPaginadosCarrera(pagina:number, tamanio:number, idCarrera:string):Observable<Comentario[]>{
+    return this.HttpClient.get<Comentario[]>(this.urlBase+"/comentario/encontrarComentariosPorIdCarrera/"+idCarrera+"?pagina="+pagina+"&tamanio="+tamanio);
   }
 }

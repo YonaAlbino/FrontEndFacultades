@@ -7,6 +7,13 @@
                 <a style="text-decoration: none; color: black; font-weight: bold;"
                     [routerLink]="['/detalle', carrera.id]">{{ carrera.nombre }}</a>
             </td>
+            <td style="text-align: center;">
+                <input type="submit" value="Ver universidad" (click)="buscarUniversdiadPorIdCarrera(carrera, i)"
+                    style="background-color: white; border: none;">
+                <div *ngIf="universidad && indice==i">
+                    <a [routerLink]="['/detalle', universidad.id]">{{ universidad.nombre }}</a>
+                </div>
+            </td>
             <td>
                 <p *ngIf="carrera.listaCalificacion && carrera.listaCalificacion.length > 0">
                     <app-promedio-calificacion
@@ -15,5 +22,8 @@
             </td>
         </tr>
     </tbody>
-        <input type="submit" style="background-color: white; border: none;" value="Cargar mas" (click)="cargarMasCarreras()" [disabled]="listaTopCarreras.length < registrosPorPagina">
+    <input type="submit" style="background-color: white; border: none;" value="Siguiente" (click)="cargarMasCarreras()"
+        [disabled]="listaTopCarreras.length < registrosPorPagina">
+    <input type="submit" style="background-color: white; border: none;" value="Anterior" (click)="cargarMenosCarrereas()"
+        [disabled]="pagina == 0">
 </table>

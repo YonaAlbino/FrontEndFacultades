@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { Calificacion } from '../modelo/calificacion';
 
 @Component({
@@ -11,7 +11,7 @@ export class PromedioCalificacionComponent implements OnInit {
   //Obtengo la lista de calificaciones que se envio desde el elemento padre
   @Input() listaCalificacion: Calificacion[];
 
-
+  constructor(private renderer: Renderer2, private el: ElementRef){}
 
   promedio: number = 0;
   cantidadCalificaciones:number =  0;
@@ -38,20 +38,30 @@ export class PromedioCalificacionComponent implements OnInit {
   }
 
 
-  pintarEstrellas(estrellasLlenas: number) {
+  // pintarEstrellas(estrellasLlenas: number) {
     
-    var numEstrellasLlenas = estrellasLlenas;
-    var numEstrellasVacias = 5 - numEstrellasLlenas;
+  //   var numEstrellasLlenas = estrellasLlenas;
+  //   var numEstrellasVacias = 5 - numEstrellasLlenas;
 
-    var estrellasHtml = '★'.repeat(numEstrellasLlenas) + '☆'.repeat(numEstrellasVacias);
+  //   var estrellasHtml = '★'.repeat(numEstrellasLlenas) + '☆'.repeat(numEstrellasVacias);
 
-    //Obtengo la lista de nodos
-    var elementos = document.querySelectorAll(".ratingStars");
-    //Casteo la lista de nodos al ultimo objeto  html correspondiente de dicha lista
-    var elementoNodo = elementos[elementos.length - 1];
-    //Dibujo las estrellas en el objeto html
-    elementoNodo.innerHTML = estrellasHtml;
+  //   //Obtengo la lista de nodos
+  //   var elementos = document.querySelectorAll(".ratingStars");
+  //   //Casteo la lista de nodos al ultimo objeto  html correspondiente de dicha lista
+  //   var elementoNodo = elementos[elementos.length - 1];
+  //   //Dibujo las estrellas en el objeto html
+  //   elementoNodo.innerHTML = estrellasHtml;
 
+  // }
+
+  pintarEstrellas(estrellasLlenas: number) {
+    const numEstrellasLlenas = estrellasLlenas;
+    const numEstrellasVacias = 5 - numEstrellasLlenas;
+
+    const estrellasHtml = '★'.repeat(numEstrellasLlenas) + '☆'.repeat(numEstrellasVacias);
+
+    const elemento = this.el.nativeElement.querySelector('.ratingStars');
+    this.renderer.setProperty(elemento, 'innerHTML', estrellasHtml);
   }
 
 

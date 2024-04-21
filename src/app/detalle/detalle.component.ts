@@ -71,8 +71,6 @@ export class DetalleComponent implements OnInit {
         }
       }
 
-      console.log(this.listaCarreras)
-
       //this.listaCarreras = this.universidad.listaCarreras;
       this.listaComentarios = this.universidad.listaComentarios;
     } catch (error) {

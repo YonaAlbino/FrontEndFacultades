@@ -55,4 +55,8 @@ export class UniversidadServiceService {
     return this.HttpClient.get<Universidad[]>(`${this.urlBase}/universidad/paginadas?pagina=${pagina}&tamanio=${tamanio}`);
   }
 
+  getuniversidadIdCarrera(idCarrera:string):Observable<Universidad>{
+    return this.HttpClient.get<Universidad>(this.urlBase + "/universidad/universidadID/" + idCarrera);
+  }
+
 }

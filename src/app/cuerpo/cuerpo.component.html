@@ -1,12 +1,5 @@
 <app-carrusel></app-carrusel>
 
-<div style="display: flex; justify-content: center;">
-  <app-top-universidades></app-top-universidades>
-  <app-top-carreras></app-top-carreras>
-</div>
-
-
-
 <app-barra-de-busqueda></app-barra-de-busqueda>
 <div class="container contenedor-universidades">
 
@@ -59,7 +52,7 @@
 
         <li class="page-item">
           <a class="page-link" (click)="cambiarPagina(cantidadPaginas - 1 )">
-            {{cantidadPaginas  }}</a>
+            {{cantidadPaginas }}</a>
         </li>
 
         <li class="page-item" [class.disabled]="paginaActual + 1 ===  cantidadPaginas  ">
@@ -70,6 +63,11 @@
       </ul>
     </div>
   </div>
+</div>
+
+<div style="display: flex; justify-content: center;">
+  <app-top-universidades></app-top-universidades>
+  <app-top-carreras></app-top-carreras>
 </div>
 
 

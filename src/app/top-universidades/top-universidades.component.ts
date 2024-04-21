@@ -12,7 +12,7 @@ export class TopUniversidadesComponent implements OnInit {
 
   listaTopUniversidades: Universidad[] = [];
   pagina: number = 0;
-  registrosPorPagina = 4;
+  registrosPorPagina = 8;
 
 
   ngOnInit(): void {
@@ -29,6 +29,11 @@ export class TopUniversidadesComponent implements OnInit {
 
   cargarMasUniversidades() {
     this.pagina = this.pagina +1;
+    this.cargarUniversidades();
+  }
+
+  cargarMenosUniversidades(){
+    this.pagina = this.pagina - 1;
     this.cargarUniversidades();
   }
 

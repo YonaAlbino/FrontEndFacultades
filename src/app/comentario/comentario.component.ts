@@ -1,3 +1,4 @@
+
 import { Component, Input } from '@angular/core';
 import { Comentario } from '../modelo/comentario';
 import { Respuesta } from '../modelo/respuesta';
@@ -7,6 +8,7 @@ import { RespuestaService } from '../servicios/respuesta.service';
 import { Carrera } from '../modelo/carrera';
 import { Calificacion } from '../modelo/calificacion';
 import { Observable } from 'rxjs';
+import { Universidad } from '../modelo/universidad';
 
 
 @Component({
@@ -26,16 +28,28 @@ export class ComentarioComponent {
   comentario: string;
   respuestaDesdeElInput: string;
   listaComentarios: Comentario[] = [];
-  verComentarios:boolean = true;
+  verComentarios: boolean = true;
+  paginaActual: number = 0;
+  cantidadRegistros: number = 10;
 
-  //@Input() carrera: Carrera = new Carrera();
-  @Input() comentariosLista: Comentario[];
+  @Input() Universidad: Universidad;
+  @Input() carrera: Carrera;
+  // @Input() comentariosLista: Comentario[];
 
 
 
   ngOnInit(): void {
-    if (this.comentariosLista)
-      this.listaComentarios = this.comentariosLista;
+    // if (this.comentariosLista)
+    //   this.listaComentarios = this.comentariosLista;
+
+    if (this.carrera ) {
+      this.CargarComentariosPaginadosCarrera();
+    }
+
+    if (this.Universidad) {
+      this.CargarComentariosPaginadosUniversidad();
+    }
+
   }
 
 
@@ -149,6 +163,47 @@ export class ComentarioComponent {
   //Metodo para ocultar los comentarios
   ocultarComentarios() {
     this.verComentarios = !this.verComentarios;
+  }
+
+
+  //Metodo para cargar comentarios paginados
+  CargarComentariosPaginadosUniversidad() {
+    this.comentarioService.CargarComentariosPaginadosUniversidad(this.paginaActual, this.cantidadRegistros, this.Universidad.id).subscribe((listaComentarios: Comentario[]) => {
+      this.listaComentarios = listaComentarios;
+      this.paginaActual++;
+    }, (error) =>
+      console.error(error)
+    )
+
+    this.desplazarVista();
+  }
+
+  //Metodo para cargar comentarios paginados
+  CargarComentariosPaginadosCarrera() {
+    this.comentarioService.CargarComentariosPaginadosCarrera(this.paginaActual, this.cantidadRegistros, this.carrera.id).subscribe((listaComentarios: Comentario[]) => {
+      this.listaComentarios = listaComentarios;
+      this.paginaActual++;
+    }, (error) =>
+      console.error(error)
+    )
+
+    this.desplazarVista();
+  }
+
+
+  // Desplazar la vista del usuario al contenedor de comentarios
+  desplazarVista() {
+    const comentariosContainer = document.getElementById('comentariosContainer');
+    if (comentariosContainer) {
+      comentariosContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  //Metodo para recargar los comentarios
+  recargarComentarios() {
+
+    this.paginaActual = 0;
+    this.CargarComentariosPaginadosUniversidad();
   }
 
 }

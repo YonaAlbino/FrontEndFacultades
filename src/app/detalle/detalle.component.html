@@ -49,8 +49,7 @@
 
     <div *ngIf="!mostrarCarreraComponent">
 
-        <app-comentario *ngIf="universidad.listaComentarios"
-            [comentariosLista]="universidad.listaComentarios"></app-comentario>
+        <app-comentario *ngIf="universidad.listaComentarios" [Universidad]="universidad"></app-comentario>
 
         <div class="agregarComentario container" id="agregarComentario">
             <div class="cabecera">
