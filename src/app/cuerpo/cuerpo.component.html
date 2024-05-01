@@ -1,8 +1,8 @@
 <app-carrusel></app-carrusel>
 
 <app-barra-de-busqueda></app-barra-de-busqueda>
-<div class="container contenedor-universidades">
 
+<div class="container contenedor-universidades">
   <div class="card" style="width: 18rem; margin-bottom: 20px;" *ngFor="let universidad of universidades">
     <div class="imagen">
       <img src="{{universidad.imagen}}" class="card-img-top" alt="...">
@@ -24,11 +24,8 @@
 
       <a [routerLink]="['/detalle', universidad.id]" class="btn btn-primary">Ver</a>
       <a [routerLink]="['/agregarInstitucion', universidad.id]" class="btn btn-primary">Editar</a>
-
     </div>
-
   </div>
-
 </div>
 
 <div style="width: 100%;  display: flex; justify-content: center;">

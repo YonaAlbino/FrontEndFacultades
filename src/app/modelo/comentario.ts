@@ -1,3 +1,4 @@
+import { Reaccion } from "./reaccion";
 import { Respuesta } from "./respuesta";
 
 export class Comentario {
@@ -5,6 +6,7 @@ export class Comentario {
      fecha: Date = new Date();
      mensaje: string = "";
      listaRespuesta?: Respuesta[];
+     listaReaccion?:Reaccion[] = [];
      mostrarRespuestas:boolean = false;
      mostrarFormularioRespuesta:boolean = false;
 

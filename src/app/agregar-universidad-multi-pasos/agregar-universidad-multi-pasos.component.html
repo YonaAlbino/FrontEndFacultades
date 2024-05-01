@@ -1,0 +1,125 @@
+<div *ngIf="indice === 5" class="imagenContainer container">
+        <div>
+                <h1>Url imagen</h1>
+                <input type="text" class="form-control" placeholder="Cargue la url de la imagen" />
+        </div>
+
+        <div class="imagen">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Flag_of_UNESCO.svg/900px-Flag_of_UNESCO.svg.png" alt="" />
+        </div>
+
+        <div style="margin-top: 20px">
+                <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
+                <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+        </div>
+</div>
+
+<form (ngSubmit)="enviarFormulario()" [formGroup]="formularioAltaUniversidad">
+        <div class="contenedorGlobal container" *ngIf="indice != 5">
+                <div class="contenedorHijo container">
+                        <div *ngIf="indice === 1" class="caja">
+
+                                <!-- <div style="width: 100%; height: 100%;">
+                                <img src="./assets/imagenes/undraw_at_work_re_qotl.svg" style="width: 10%;" alt="">
+                        </div> -->
+
+                                <div class="titulo">
+                                        <h1>Ingresa el nombre de la universidad</h1>
+                                </div>
+                                <div class="campoNombre">
+                                        <input class="form form-control" type="text" formControlName="nombre" id="nombre" placeholder="Nombre universidad" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente" 
+                                        [disabled]="formularioAltaUniversidad.get('nombre')?.errors != null" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                </div>
+                                
+                                <div  *ngIf="formularioAltaUniversidad.get('nombre')?.touched && formularioAltaUniversidad.get('nombre')?.errors?.['required']" class="alert alert-danger">
+                                        Este campo es requerido
+                                </div>
+                                
+                                <div  *ngIf="formularioAltaUniversidad.get('nombre')?.touched && formularioAltaUniversidad.get('nombre')?.errors?.['minlength']" class="alert alert-danger">
+                                        Este campo necesito un minimo de 4 caracteres
+                                </div>
+                        </div>
+
+                        <div *ngIf="indice === 2" class="caja">
+                                <div class="titulo">
+                                        <h1>Ingresa la dirección web</h1>
+                                </div>
+                                <div class="campoNombre">
+                                        <input class="form form-control" type="text" placeholder="https://ejemplo.com" formControlName="direccionWeb"/>
+                                        <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente"
+                                        [disabled]="formularioAltaUniversidad.get('direccionWeb')?.errors != null" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                </div>
+                        </div>
+                        
+                        <div  *ngIf="formularioAltaUniversidad.get('direccionWeb')?.touched && formularioAltaUniversidad.get('direccionWeb')?.errors?.['required']" class="alert alert-danger">
+                               Este campo es requerido
+                        </div>
+                        
+                        <div *ngIf="formularioAltaUniversidad.get('direccionWeb')?.touched && formularioAltaUniversidad.get('direccionWeb')?.errors?.['pattern']" class="alert alert-danger">
+                                La dirección ingresada no es valida
+                        </div>
+                                
+                                <!-- <h1>Tengo que terminar de hacer las comprobaciones de error de aqui para abajo</h1> -->
+                        
+                        <div *ngIf="indice === 3" class="caja">
+                                <div class="titulo">
+                                        <h1>Ingresa la dirección fisica</h1>
+                                </div>
+                                <div class="campoNombre">
+                                        <input class="form form-control" type="text" placeholder="ciudad/provincia/país" />
+                                        <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                </div>
+                        </div>
+
+                        <div *ngIf="indice === 4" class="descripcion">
+                                <div class="titulo" style="margin: auto">
+                                        <h1>Ingresa una descripción sobre la universidad</h1>
+                                </div>
+                                <div class="campoDescripcion">
+                                        <textarea class="form form-control" placeholder="Descripción" rows="4" cols="100" class="form-control"></textarea>
+                                        <div class="botonesDecripcion">
+                                                <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
+                                                <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div *ngIf="indice === 6" class="carreras">
+                                <div style="text-align: center">
+                                        <h1>Agregar carrera a la universidad</h1>
+                                </div>
+
+                                <div class="agregarCarrera">
+                                        <input type="text" class="form-control" placeholder="Nombre" name="" id="" />
+                                        <input type="text" class="form-control" placeholder="Grado" name="" id="" />
+                                        <input type="text" class="form-control" placeholder="Duración" name="" id="" />
+                                </div>
+
+                                <div style="display: flex; justify-content: center">
+                                        <button style="border: none; background-color: white;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                </svg>
+                                        </button>
+                                </div>
+
+                                <div class="botones">
+                                        <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                </div>
+                        </div>
+                        <div *ngIf="indice === 7" style="display:flex; justify-content: center; flex-direction: column; align-items: center;">
+                                <h1 style="text-align: center;">Califica la universidad!!</h1>
+                                <app-puntuacion (calificacionGuardada)="handleCalificacionGuardada($event)"></app-puntuacion>
+                                <div class="botones">
+                                        <input style="margin-left: 5px" class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
+                                        <input [disabled]="formularioAltaUniversidad.invalid" class="btn btn-primary" type="submit" value="Enviar" name="" id="" style="margin-left: 5px;" />
+                                </div>
+                        </div>
+                </div>
+        </div>
+</form>

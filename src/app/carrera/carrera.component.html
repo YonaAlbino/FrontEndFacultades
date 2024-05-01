@@ -19,9 +19,7 @@
     </div>
 </div>
 
-
-<app-comentario [carrera]="carrera"></app-comentario>
-
+<app-comentario *ngIf="variableDeEjemplo" [carrera]="carrera"></app-comentario>
 
 
 <div class="agregarComentario container" id="agregarComentario">

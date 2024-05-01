@@ -1,0 +1,97 @@
+form  {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80%;
+        width: 100%;
+}
+
+.contenedorGlobal{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+}
+
+.contenedorHijo {
+        border: 1px solid #d1d1d1;
+        width: 80%;
+        height: 50%;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+}
+
+.caja {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+}
+
+.contenedorHijo .caja .campoNombre {
+        width: 50%;
+        width: 60%;
+}
+
+.contenedorHijo .caja .campoNombre:nth-child(2) {
+        display: flex;
+        justify-content: flex-end;
+}
+
+.descripcion {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+}
+
+.descripcion .campoDescripcion textarea {
+        height: 100%;
+}
+
+.descripcion .campoDescripcion .botonesDecripcion {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+}
+
+.imagenContainer {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 50%;
+        margin: auto;
+        text-align: center;
+        margin-top: 50px;
+}
+
+.imagenContainer .imagen {
+        width: 600px;
+        margin: auto;
+        margin-top: 50px;
+}
+
+.imagenContainer .imagen img{
+        width: 100%;
+}
+
+.contenedorHijo .carreras .agregarCarrera {
+        display: flex;
+        flex-direction: column;
+}
+
+.contenedorHijo .carreras .agregarCarrera .form-control{
+        margin-bottom: 15px;
+}
+
+.contenedorHijo .carreras .botones{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+}

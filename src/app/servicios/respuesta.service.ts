@@ -46,8 +46,6 @@ export class RespuestaService {
 
   actualizarRespuesta(respuestaOriginal: Respuesta):Observable<any> {
 
-    console.log(respuestaOriginal.listaRespuesta + " lista de respuestas en el servicio")
-
     const url = this.urlBase + "/respuesta/editar";
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

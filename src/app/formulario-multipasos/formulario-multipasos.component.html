@@ -1,0 +1,43 @@
+<form (ngSubmit)="enviarFormulario()" [formGroup]="ejemploForm">
+        <div *ngIf="pasoActual === 1">
+                <h1>nombre</h1>
+                <input type="text" placeholder="nombre" name="" id="nombre" formControlName="nombre">
+                <div *ngIf="ejemploForm.get('nombre')?.touched && ejemploForm.get('nombre')?.errors?.['required']" class="alert alert-danger">
+                        El nombre es requerido
+                </div>
+                <div *ngIf="ejemploForm.get('nombre')?.touched && ejemploForm.get('nombre')?.errors?.['minlength']" class="alert alert-danger">
+                        El nombre debe tener al menos {{ejemploForm.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres
+                </div>
+                <button (click)="siguientePaso()">Siguiente</button>
+        </div>
+
+        <div *ngIf="pasoActual === 2">
+                <h2>apellido</h2>
+                <input type="text" placeholder="apellido" name="" id="apellido" formControlName="apellido">
+                <div *ngIf="ejemploForm.get('apellido')?.touched && ejemploForm.get('apellido')?.errors?.['required']" class="alert alert-danger">
+                        El apellido es requerido
+                </div>
+                <button (click)="pasoAnterior()">Anterior</button>
+                <button (click)="siguientePaso()">Siguiente</button>
+        </div>
+
+        <div *ngIf="pasoActual === 3">
+                <h2>apellido</h2>
+                <input type="text" placeholder="segundo nombre" name="" id="segundoNombre" formControlName="segundoNombre">
+                <div *ngIf="ejemploForm.get('segundoNombre')?.touched && ejemploForm.get('segundoNombre')?.errors?.['required']" class="alert alert-danger">
+                        Este campo es requerido
+                </div>
+                <button (click)="pasoAnterior()">Anterior</button>
+                <button (click)="siguientePaso()">Siguiente</button>
+        </div>
+
+        <div *ngIf="pasoActual === 4">
+                <h3>edad</h3>
+                <input type="text" placeholder="edad" name="" id="edad" formControlName="edad">
+                <div *ngIf="ejemploForm.get('edad')?.touched && ejemploForm.get('edad')?.errors?.['required']" class="alert alert-danger">
+                        El apellido es requerido
+                </div>
+                <button (click)="pasoAnterior()">Anterior</button>
+                <button [disabled]="ejemploForm.invalid" type="submit">Enviar</button>
+        </div>
+</form>

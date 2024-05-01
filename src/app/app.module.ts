@@ -26,6 +26,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TopUniversidadesComponent } from './top-universidades/top-universidades.component';
 import { TopCarrerasComponent } from './top-carreras/top-carreras.component';
+import { RecargaDirective } from './directivas/recarga.directive';
+import { ReaccionComponent } from './modelo/reaccion/reaccion.component';
+import { FormularioMultipasosComponent } from './formulario-multipasos/formulario-multipasos.component';
+import { AgregarUniversidadMultiPasosComponent } from './agregar-universidad-multi-pasos/agregar-universidad-multi-pasos.component';
 
 
 
@@ -38,8 +42,9 @@ const appRoutes:Routes=[
   {path:'agregarInstitucion/:id', component:AgregarInstitucionComponent},
   {path:'puntuacion', component:PuntuacionComponent},
   {path:'detalle/:id', component:DetalleComponent},
-  {path:'carrera/:id', component:CarreraComponent}
-
+  {path:'carrera/:id', component:CarreraComponent},
+  {path:'formMultiPasos', component:FormularioMultipasosComponent},
+  {path:'agregarUniversidadMultiPasos', component:AgregarUniversidadMultiPasosComponent}
 
 ];
 
@@ -63,6 +68,10 @@ const appRoutes:Routes=[
     ComentarioComponent,
     TopUniversidadesComponent,
     TopCarrerasComponent,
+    RecargaDirective,
+    ReaccionComponent,
+    FormularioMultipasosComponent,
+    AgregarUniversidadMultiPasosComponent,
     
   ],
   imports: [

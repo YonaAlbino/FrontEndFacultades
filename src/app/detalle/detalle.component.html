@@ -44,12 +44,12 @@
     </div>
 
     <!-- componente para ver los detalles de cada carrera -->
-    <app-carrera *ngIf="mostrarCarreraComponent" [carrera]="carreraDeCarreraComponent"></app-carrera>
+    <app-carrera *ngIf="mostrarCarreraComponent " [carrera]="carreraDeCarreraComponent"></app-carrera>
 
 
     <div *ngIf="!mostrarCarreraComponent">
 
-        <app-comentario *ngIf="universidad.listaComentarios" [Universidad]="universidad"></app-comentario>
+        <app-comentario *ngIf="universidad.listaComentarios && variableDeEjemplo " [Universidad]="universidad"></app-comentario>
 
         <div class="agregarComentario container" id="agregarComentario">
             <div class="cabecera">

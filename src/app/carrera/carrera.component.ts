@@ -8,6 +8,7 @@ import { ComentarioService } from '../servicios/comentario.service';
 import { Respuesta } from '../modelo/respuesta';
 import { RespuestaService } from '../servicios/respuesta.service';
 import { Observable } from 'rxjs';
+import { AlertasService } from '../servicios/alertas.service';
 
 @Component({
   selector: 'app-carrera',
@@ -16,13 +17,13 @@ import { Observable } from 'rxjs';
 })
 export class CarreraComponent implements OnInit {
 
-  constructor(private carreraService: CarreraService, private comentarioService: ComentarioService, private respuestaService: RespuestaService) { }
+  constructor(private carreraService: CarreraService, private comentarioService: ComentarioService, private respuestaService: RespuestaService, private alertas:AlertasService) { }
 
   respuestaDeLaRespuestaDelComentario: string;
   comentario: string;
   respuestaDesdeElInput: string;
   listaComentarios: Comentario[];
-
+  variableDeEjemplo:boolean = true;
   @Input() carrera: Carrera = new Carrera();
 
   ngOnInit(): void {
@@ -42,11 +43,22 @@ export class CarreraComponent implements OnInit {
 
   //Metodo para agregar un comentario a la carrera
   guardarComentario(mensaje: string) {
+    this.variableDeEjemplo = false;
     this.comentarioService.guardarComentario(this.crearComentario(mensaje)).subscribe((comentario: Comentario) => {
       this.actualizarCarrera(comentario);
+      
     }, (error) => {
       console.error(error);
     })
+  }
+
+  desplazarVista() {
+    const comentariosContainer = document.getElementById(
+      'comentariosContainer'
+    );
+    if (comentariosContainer) {
+      comentariosContainer.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   //Metodo para crear una nueva instancia de un Comentario
@@ -70,6 +82,8 @@ export class CarreraComponent implements OnInit {
     this.carrera.listaComentarios?.push(comentarioAguardar);
     this.carreraService.actualizarCarrera(this.carrera).subscribe((carrera: Carrera) => {
       console.log(carrera);
+      this.variableDeEjemplo = true;
+      this.alertas.alertaExito("Comentario guardado");
     }, (error) => {
       console.error(error);
     });

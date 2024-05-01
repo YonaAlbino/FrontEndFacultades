@@ -48,6 +48,13 @@ export class ContactoComponent implements OnInit {
     return this.formContacto.get('asunto') as FormControl;
   }
 
+  vaciarCampos() {
+    this.formContacto.get('asunto')?.setValue('');
+    this.formContacto.get('apellido')?.setValue('');
+    this.formContacto.get('correo')?.setValue('');
+    this.formContacto.get('mensaje')?.setValue('');
+    this.formContacto.get('nombre')?.setValue('');
+  }
 
   enviar() {
     if (this.formContacto.valid) {
@@ -56,6 +63,8 @@ export class ContactoComponent implements OnInit {
       const emailEmisor = this.formContacto.get('correo')?.value;
       const mensaje = this.formContacto.get('mensaje')?.value;
       const asunto = this.formContacto.get('asunto')?.value;
+
+      this.vaciarCampos();
 
       const nuevoEmail = this.emailService.crearEmailContacto(nombre, apellido, emailEmisor, mensaje, asunto);
       this.alertas.alertaCuentaRegresiva("Enviando correo!", 4000);

@@ -42,6 +42,7 @@ export class DetalleComponent implements OnInit {
   listaCalificacion?: Calificacion[];
   listaComentarios?: Comentario[];
   isChecked: boolean = false;
+  variableDeEjemplo: boolean = true;
 
 
 
@@ -130,13 +131,15 @@ export class DetalleComponent implements OnInit {
   }
 
   agregarNuevoComentario(mensaje:string) {
+    this.variableDeEjemplo = false;
     this.crearNuevoComentario(mensaje).subscribe(
       (comentario: Comentario) => {
         comentario.listaRespuesta = [];
         this.universidad.listaComentarios?.push(comentario);
-        console.log(comentario)
         this.uniService.actualizarUniversidad(this.universidad).subscribe((universidad: Universidad) => {
           this.universidad = universidad;
+          this.variableDeEjemplo = true;
+          this.alertas.alertaExito("Comentario guardado");
         });
         this.nuevoComentario = "";
       },
