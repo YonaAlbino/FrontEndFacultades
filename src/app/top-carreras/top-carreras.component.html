@@ -2,7 +2,7 @@
 <table class="table" style="border: 1px solid;">
     <tbody>
         <tr *ngFor="let carrera of listaTopCarreras; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
+            <th scope="row">{{ i + 1 + numeroUltimaIteracion}}</th>
             <td>
                 <a style="text-decoration: none; color: black; font-weight: bold;"
                     [routerLink]="['/detalle', carrera.id]">{{ carrera.nombre }}</a>
@@ -22,7 +22,7 @@
             </td>
         </tr>
     </tbody>
-    <input type="submit" style="background-color: white; border: none;" value="Siguiente" (click)="cargarMasCarreras()"
+    <input type="submit" style="background-color: white; border: none;" value="Siguiente" (click)="cargarMasCarreras(this.listaTopCarreras.length)"
         [disabled]="listaTopCarreras.length < registrosPorPagina">
     <input type="submit" style="background-color: white; border: none;" value="Anterior" (click)="cargarMenosCarrereas()"
         [disabled]="pagina == 0">

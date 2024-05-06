@@ -41,7 +41,7 @@ export class DetalleComponent implements OnInit {
   carreraDeCarreraComponent: Carrera;
   listaCalificacion?: Calificacion[];
   listaComentarios?: Comentario[];
-  isChecked: boolean = false;
+  // isChecked: boolean = false;
   variableDeEjemplo: boolean = true;
 
 

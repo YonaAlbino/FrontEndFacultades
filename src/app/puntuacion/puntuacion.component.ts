@@ -24,7 +24,6 @@ export class PuntuacionComponent {
   
       this.guardarCalificacion().subscribe((calificacion: Calificacion) => {
         this.calificacionGuardada.emit(calificacion);
-     
       });
 
     

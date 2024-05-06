@@ -1,6 +1,14 @@
 <app-carrusel></app-carrusel>
 
-<app-barra-de-busqueda></app-barra-de-busqueda>
+<app-barra-de-busqueda (universdiadEncontrada)="manejadorUniversdiadEncontrada($event)"></app-barra-de-busqueda>
+
+<div style="display: flex; justify-content: center;">
+  <input type="submit" class="btn btn-primary" value="Recargar" [disabled]="recarga" (click)="recargar()">
+</div>
+
+<div class="alert alert-danger" style="width: 20%; margin: auto;" *ngIf="universdiadBusacada">
+  Universidad no encontrada
+</div>
 
 <div class="container contenedor-universidades">
   <div class="card" style="width: 18rem; margin-bottom: 20px;" *ngFor="let universidad of universidades">
@@ -28,7 +36,7 @@
   </div>
 </div>
 
-<div style="width: 100%;  display: flex; justify-content: center;">
+<div style="width: 100%;  display: flex; justify-content: center;" class="container">
   <div class="pagination">
     <div>
       <ul style="display: flex; list-style: none; ">

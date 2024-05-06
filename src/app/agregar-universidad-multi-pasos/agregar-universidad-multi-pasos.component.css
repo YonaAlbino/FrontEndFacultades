@@ -1,3 +1,4 @@
+
 form  {
         display: flex;
         align-items: center;
@@ -71,13 +72,11 @@ form  {
         margin-top: 50px;
 }
 
-.imagenContainer .imagen {
-        width: 600px;
-        margin: auto;
-        margin-top: 50px;
+ .imagen {
+     
 }
 
-.imagenContainer .imagen img{
+ .imagen img{
         width: 100%;
 }
 

@@ -44,6 +44,10 @@ export class UniversidadServiceService {
   public buscarUniversdiad(id: number): Observable<any> {
     return this.HttpClient.get<any>(this.urlBase + "/universidad/buscar/" + id);
   }
+  
+  public findUniversidadByName(name:string):Observable<Universidad[]>{
+    return this.HttpClient.get<Universidad[]>(this.urlBase + "/universidad/findUniversidadByName/" + name);
+  }
 
   eliminarUniversidad(id: number): Observable<any> {
     const url = `${this.urlBase}/universidad/eliminar?id=${id}`;

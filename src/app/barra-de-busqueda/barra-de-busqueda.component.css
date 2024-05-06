@@ -6,7 +6,7 @@
     width: 50%;
 }
 
-form{
+.barraBusqueda{
    display: flex;
    flex-direction: row;
    justify-content: center;

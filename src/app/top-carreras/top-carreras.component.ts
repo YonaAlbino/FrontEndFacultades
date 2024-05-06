@@ -14,10 +14,10 @@ export class TopCarrerasComponent {
 
   listaTopCarreras: Carrera[] = [];
   pagina: number = 0;
-  registrosPorPagina = 8;
+  registrosPorPagina = 5;
   universidad: Universidad = new Universidad();
   indice:number;
-
+  numeroUltimaIteracion:number = 0;
   ngOnInit(): void {
     this.cargarCarreras();
   }
@@ -30,14 +30,16 @@ export class TopCarrerasComponent {
     })
   }
 
-  cargarMasCarreras() {
+  cargarMasCarreras(cantidadCarreras:number) {
     this.pagina = this.pagina + 1;
     this.cargarCarreras();
+    this.numeroUltimaIteracion = this.numeroUltimaIteracion + cantidadCarreras;
   }
 
   cargarMenosCarrereas(){
     this.pagina = this.pagina - 1;
     this.cargarCarreras();
+    this.numeroUltimaIteracion = this.numeroUltimaIteracion - this.registrosPorPagina;
   }
 
   buscarUniversdiadPorIdCarrera(carrera:Carrera, index:number) {

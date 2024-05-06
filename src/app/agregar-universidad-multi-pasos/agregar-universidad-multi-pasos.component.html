@@ -1,21 +1,6 @@
-<div *ngIf="indice === 5" class="imagenContainer container">
-        <div>
-                <h1>Url imagen</h1>
-                <input type="text" class="form-control" placeholder="Cargue la url de la imagen" />
-        </div>
-
-        <div class="imagen">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Flag_of_UNESCO.svg/900px-Flag_of_UNESCO.svg.png" alt="" />
-        </div>
-
-        <div style="margin-top: 20px">
-                <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
-                <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
-        </div>
-</div>
-
-<form (ngSubmit)="enviarFormulario()" [formGroup]="formularioAltaUniversidad">
-        <div class="contenedorGlobal container" *ngIf="indice != 5">
+<form [formGroup]="formularioAltaUniversidad" style="display: flex; align-items: center;">
+        <div class="contenedorGlobal container">
+                <p>{{indice + "/7"}}</p>
                 <div class="contenedorHijo container">
                         <div *ngIf="indice === 1" class="caja">
 
@@ -23,20 +8,20 @@
                                 <img src="./assets/imagenes/undraw_at_work_re_qotl.svg" style="width: 10%;" alt="">
                         </div> -->
 
+
                                 <div class="titulo">
                                         <h1>Ingresa el nombre de la universidad</h1>
                                 </div>
                                 <div class="campoNombre">
                                         <input class="form form-control" type="text" formControlName="nombre" id="nombre" placeholder="Nombre universidad" />
-                                        <input class="btn btn-primary" type="submit" value="Siguiente" 
-                                        [disabled]="formularioAltaUniversidad.get('nombre')?.errors != null" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente" [disabled]="formularioAltaUniversidad.get('nombre')?.errors != null" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
                                 </div>
-                                
-                                <div  *ngIf="formularioAltaUniversidad.get('nombre')?.touched && formularioAltaUniversidad.get('nombre')?.errors?.['required']" class="alert alert-danger">
+
+                                <div *ngIf="formularioAltaUniversidad.get('nombre')?.touched && formularioAltaUniversidad.get('nombre')?.errors?.['required']" class="alert alert-danger">
                                         Este campo es requerido
                                 </div>
-                                
-                                <div  *ngIf="formularioAltaUniversidad.get('nombre')?.touched && formularioAltaUniversidad.get('nombre')?.errors?.['minlength']" class="alert alert-danger">
+
+                                <div *ngIf="formularioAltaUniversidad.get('nombre')?.touched && formularioAltaUniversidad.get('nombre')?.errors?.['minlength']" class="alert alert-danger">
                                         Este campo necesito un minimo de 4 caracteres
                                 </div>
                         </div>
@@ -46,31 +31,36 @@
                                         <h1>Ingresa la dirección web</h1>
                                 </div>
                                 <div class="campoNombre">
-                                        <input class="form form-control" type="text" placeholder="https://ejemplo.com" formControlName="direccionWeb"/>
+                                        <input class="form form-control" type="text" placeholder="https://ejemplo.com" formControlName="direccionWeb" />
                                         <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
-                                        <input class="btn btn-primary" type="submit" value="Siguiente"
-                                        [disabled]="formularioAltaUniversidad.get('direccionWeb')?.errors != null" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente" [disabled]="formularioAltaUniversidad.get('direccionWeb')?.errors != null" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
                                 </div>
                         </div>
-                        
-                        <div  *ngIf="formularioAltaUniversidad.get('direccionWeb')?.touched && formularioAltaUniversidad.get('direccionWeb')?.errors?.['required']" class="alert alert-danger">
-                               Este campo es requerido
+
+                        <div *ngIf="formularioAltaUniversidad.get('direccionWeb')?.touched && formularioAltaUniversidad.get('direccionWeb')?.errors?.['required']" ´class="alert alert-danger">
+                                Este campo es requerido
                         </div>
-                        
+
                         <div *ngIf="formularioAltaUniversidad.get('direccionWeb')?.touched && formularioAltaUniversidad.get('direccionWeb')?.errors?.['pattern']" class="alert alert-danger">
                                 La dirección ingresada no es valida
                         </div>
-                                
-                                <!-- <h1>Tengo que terminar de hacer las comprobaciones de error de aqui para abajo</h1> -->
-                        
+
+
                         <div *ngIf="indice === 3" class="caja">
                                 <div class="titulo">
                                         <h1>Ingresa la dirección fisica</h1>
                                 </div>
                                 <div class="campoNombre">
-                                        <input class="form form-control" type="text" placeholder="ciudad/provincia/país" />
+                                        <input class="form form-control" type="text" placeholder="ciudad/provincia/país" formControlName="direccionFisica" />
                                         <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
-                                        <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente" [disabled]="formularioAltaUniversidad.get('direccionFisica')?.errors != null" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
+                                </div>
+                                <div *ngIf="formularioAltaUniversidad.get('direccionFisica')?.errors?.['required'] && formularioAltaUniversidad.get('direccionFisica')?.touched" class="alert alert-danger">
+                                        Este campo es requerido
+                                </div>
+
+                                <div *ngIf="formularioAltaUniversidad.get('direccionFisica')?.errors?.['minlength'] && formularioAltaUniversidad.get('direccionFisica')?.touched" class="alert alert-danger">
+                                        Este campo requiere un minimo de 10 caracteres
                                 </div>
                         </div>
 
@@ -79,32 +69,74 @@
                                         <h1>Ingresa una descripción sobre la universidad</h1>
                                 </div>
                                 <div class="campoDescripcion">
-                                        <textarea class="form form-control" placeholder="Descripción" rows="4" cols="100" class="form-control"></textarea>
-                                        <div class="botonesDecripcion">
-                                                <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
-                                                <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" name="" id="" style="margin-left: 5px;" />
-                                        </div>
+                                        <textarea class="form form-control" placeholder="Descripción" rows="4" cols="100" class="form-control" formControlName="descripcion"></textarea>
+                                </div>
+                                <div *ngIf="formularioAltaUniversidad.get('descripcion')?.touched && formularioAltaUniversidad.get('descripcion')?.errors?.['required']" class="alert alert-danger">
+                                        Este campo es requerido
+                                </div>
+                                <div *ngIf="formularioAltaUniversidad.get('descripcion')?.touched && formularioAltaUniversidad.get('descripcion')?.errors?.['minlength']" class="alert alert-danger">
+                                        Este campo requiere un minimo de 30 caracreres
+                                </div>
+                                <div class="botonesDecripcion" style="display: flex; justify-content: center; margin-top: 10px;">
+                                        <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" name="" id="" [disabled]="formularioAltaUniversidad.get('descripcion')?.errors != null" style="margin-left: 5px;" />
+                                </div>
+                        </div>
+
+                        <div *ngIf="indice === 5" class="imagenContainer container">
+                                <div>
+                                        <h1>Url imagen</h1>
+                                        <input type="text" class="form-control" placeholder="Cargue la url de la imagen" formControlName="imagen" (input)="changeImagen($event)"/>
+                                </div>
+                                
+                                <div *ngIf="formularioAltaUniversidad.get('imagen')?.touched && formularioAltaUniversidad.get('imagen')?.errors?.['required']" class="alert alert-danger">
+                                        Este campo es requerido
+                                </div>
+
+                                <!-- <div class="imagen">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Flag_of_UNESCO.svg/900px-Flag_of_UNESCO.svg.png" alt="" />
+                                </div> -->
+
+                                <div style="margin-top: 20px">
+                                        <input class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
+                                        <input class="btn btn-primary" type="submit" value="Siguiente" (click)="siguiente()" [disabled]="formularioAltaUniversidad.get('imagen')?.errors != null"
+                                         name="" id="" style="margin-left: 5px;" />
                                 </div>
                         </div>
 
                         <div *ngIf="indice === 6" class="carreras">
                                 <div style="text-align: center">
-                                        <h1>Agregar carrera a la universidad</h1>
+                                        <h1>¿Agregar carrera a la universidad?</h1>
                                 </div>
 
-                                <div class="agregarCarrera">
-                                        <input type="text" class="form-control" placeholder="Nombre" name="" id="" />
-                                        <input type="text" class="form-control" placeholder="Grado" name="" id="" />
-                                        <input type="text" class="form-control" placeholder="Duración" name="" id="" />
+                                <div *ngIf="agregarCarrera" class="agregarCarrera">
+                                        <input type="text" class="form-control" placeholder="Nombre" name="" id="" formControlName="nombreCarrera" />
+                                        <input type="text" class="form-control" placeholder="Grado" name="" id="" formControlName="gradoCarrera" />
+                                        <input type="text" class="form-control" placeholder="Duración" name="" id="" formControlName="duracionCarrera" />
+                                        <input type="submit" class="btn btn-success" value="Agregar" (click)="agregarCarreras()" [disabled]="!(formularioAltaUniversidad.get('nombreCarrera')?.value !== '' 
+                                        && formularioAltaUniversidad.get('gradoCarrera')?.value !== '' 
+                                        && formularioAltaUniversidad.get('duracionCarrera')?.value !== '')" name="" id="">
                                 </div>
 
                                 <div style="display: flex; justify-content: center">
-                                        <button style="border: none; background-color: white;">
+                                        <button (click)="mostrarCamposAgregarCarrera()" style="border: none; background-color: white;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                                                 </svg>
                                         </button>
+                                </div>
+
+                                <div *ngIf="formularioAltaUniversidad.get('nombreCarrera')?.touched && formularioAltaUniversidad.get('nombreCarrera')?.errors?.['required']" class="alert alert-danger">
+                                        El campo es requerido
+                                </div>
+
+                                <div *ngIf="formularioAltaUniversidad.get('gradoCarrera')?.touched && formularioAltaUniversidad.get('gradoCarrera')?.errors?.['required']" class="alert alert-danger">
+                                        El campo es requerido
+                                </div>
+
+                                <div *ngIf="formularioAltaUniversidad.get('duracionCarrera')?.touched && formularioAltaUniversidad.get('duracionCarrera')?.errors?.['required']" class="alert alert-danger">
+                                        El campo es requerido
                                 </div>
 
                                 <div class="botones">
@@ -114,12 +146,21 @@
                         </div>
                         <div *ngIf="indice === 7" style="display:flex; justify-content: center; flex-direction: column; align-items: center;">
                                 <h1 style="text-align: center;">Califica la universidad!!</h1>
-                                <app-puntuacion (calificacionGuardada)="handleCalificacionGuardada($event)"></app-puntuacion>
+                                <app-puntuacion (calificacionGuardada)="guardarCalificacion($event)"></app-puntuacion>
                                 <div class="botones">
                                         <input style="margin-left: 5px" class="btn btn-primary" type="submit" value="Atras" (click)="anterior()" name="" id="" />
-                                        <input [disabled]="formularioAltaUniversidad.invalid" class="btn btn-primary" type="submit" value="Enviar" name="" id="" style="margin-left: 5px;" />
+                                        <input [disabled]="formularioAltaUniversidad.invalid" (click)="enviarFormulario()" class="btn btn-primary" type="submit" value="Enviar" name="" id="" style="margin-left: 5px;" />
                                 </div>
                         </div>
                 </div>
         </div>
+        
+        <div class="imagen" *ngIf="indice ===  5">
+                 <img src="{{imagenPorDefecto}}" alt="" (error)="manejadorErrorImagenUniversdiad()" (load)="manejadorExitoImagenUniversdiad()"/> 
+                 <div class="alert alert-danger" *ngIf="imagenCargada">
+                        La dirección url no es valida
+                </div>
+                <!-- <img src="{{formularioAltaUniversidad.get('imagen')?.value}}" alt="" /> -->
+        </div>
+
 </form>
