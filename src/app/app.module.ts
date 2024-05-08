@@ -30,6 +30,7 @@ import { RecargaDirective } from './directivas/recarga.directive';
 import { ReaccionComponent } from './modelo/reaccion/reaccion.component';
 import { FormularioMultipasosComponent } from './formulario-multipasos/formulario-multipasos.component';
 import { AgregarUniversidadMultiPasosComponent } from './agregar-universidad-multi-pasos/agregar-universidad-multi-pasos.component';
+import { EdicionComponent } from './edicion/edicion.component';
 
 
 
@@ -44,7 +45,8 @@ const appRoutes:Routes=[
   {path:'detalle/:id', component:DetalleComponent},
   {path:'carrera/:id', component:CarreraComponent},
   {path:'formMultiPasos', component:FormularioMultipasosComponent},
-  {path:'agregarUniversidadMultiPasos', component:AgregarUniversidadMultiPasosComponent}
+  {path:'agregarUniversidadMultiPasos', component:AgregarUniversidadMultiPasosComponent},
+  {path: 'edicionUniversdiad/:id', component:EdicionComponent}
 
 ];
 
@@ -72,6 +74,7 @@ const appRoutes:Routes=[
     ReaccionComponent,
     FormularioMultipasosComponent,
     AgregarUniversidadMultiPasosComponent,
+    EdicionComponent,
     
   ],
   imports: [

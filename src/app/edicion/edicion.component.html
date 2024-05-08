@@ -1,0 +1,135 @@
+<div class="container">
+
+        <div class="tituloPrincipal">
+                <h1>Edición universidad</h1>
+                <p>Aquí puedes modificar los datos de tu universidad</p>
+        </div>
+
+        <div class="infoEdicion">
+                <div class="informacion">
+                        <h2>Modifica los datos de la universidad</h2>
+                        <p>Recuerda que la finalidad de esta página es ofrecer información útil para los futuros estudiantes que estén pensando en asistir a esta universidad</p>
+                </div>
+                <div class="imagenInfo">
+                        <img src="./assets/imagenes/undraw_experience_design_re_dmqq.svg" alt="">
+                </div>
+        </div>
+
+        <form [formGroup]="formularioEdicionUniversidad" action="" class="datosUniversidad">
+                <div class="informacionBasica">
+                        <div>
+                                <h2>Información básica</h2>
+                        </div>
+
+                        <div class="campoInformacion">
+                                <p>Nombre</p>
+                                <input type="text" placeholder="Nombre universidad" name="" id="" formControlName="nombre">
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('nombre')?.touched && formularioEdicionUniversidad.get('nombre')?.errors?.['required']">
+                                Este campo es obligatorio
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('nombre')?.touched && formularioEdicionUniversidad.get('nombre')?.errors?.['minlength']">
+                                Este campo requiere un minimo de 4 caracteres
+                        </div>
+                        <!-- -------------------------------- -->
+
+                        <div class="campoInformacion">
+                                <p>Dirección web</p>
+                                <input type="text" placeholder="Dirección web" name="" id="" formControlName="direccionWeb">
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('direccionWeb')?.touched && formularioEdicionUniversidad.get('direccionWeb')?.errors?.['required']">
+                                Este campo es requerido
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('direccionWeb')?.touched && formularioEdicionUniversidad.get('direccionWeb')?.errors?.['pattern']">
+                                Dirección invalida
+                        </div>
+                        <!-- -------------------------------- -->
+
+                        <div class="campoInformacion">
+                                <p>Dirección fisica</p>
+                                <input type="text" placeholder="Dirección" name="" id="" formControlName="direccionFisica">
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('direccionFisica')?.touched && formularioEdicionUniversidad.get('direccionFisica')?.errors?.['required']">
+                                Este campo es requerido
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('direccionFisica')?.touched && formularioEdicionUniversidad.get('direccionFisica')?.errors?.['minlength']">
+                                Este campo requiere un minimo de 10 caracteres
+                        </div>
+                        <!-- -------------------------------- -->
+
+                        <div class="campoInformacion">
+                                <p>Descripción</p>
+                                <textarea class="form form-control" placeholder="Descripción" rows="3" cols="100" class="form-control" formControlName="descripcion"></textarea>
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('descripcion')?.touched && formularioEdicionUniversidad.get('descripcion')?.errors?.['required']">
+                                Este campo es requerido
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('descripcion')?.touched && formularioEdicionUniversidad.get('descripcion')?.errors?.['minlength']">
+                                Este campo requiere un minimo de 30 caracteres
+                        </div>
+                </div>
+
+                <div class="imagenUniversidad">
+                        <div>
+                                <h2>Imagen</h2>
+                        </div>
+
+                        <div class="campoInformacion">
+                                <p>Url imagen</p>
+                                <input type="text" placeholder="Imagen" name="" id="" formControlName="imagen">
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="formularioEdicionUniversidad.get('imagen')?.touched && formularioEdicionUniversidad.get('imagen')?.errors?.['required']">
+                                Este campo es requerido
+                        </div>
+
+                        <div class="imagen">
+                                <img [src]="formularioEdicionUniversidad.get('imagen')?.value" alt="">
+                        </div>
+                </div>
+                
+                <input type="submit" value="Guardar cambios" class="btn btn-success enviarUniversidad" [disabled]="!formularioEdicionUniversidad.valid" (click)="actualizarUniversidad()">
+        </form>
+
+        <div class="carreras container">
+                <div>
+                        <h2>Carreras</h2>
+                </div>
+
+                <form [formGroup]="formularioCarrera" class="contenedorCamposCarrera">
+                        <input type="text" placeholder="Nombre" formControlName="nombre">
+                        <input type="text" placeholder="Grado" formControlName="grado">
+                        <input type="text" placeholder="Duración" formControlName="duracion">
+                        <input type="submit" value="Agregar" class="btn btn-success" (click)="agregarCarrera()" [disabled]="!(formularioCarrera.get('nombre')?.value != '' && 
+                        formularioCarrera.get('grado')?.value != '' && 
+                        formularioCarrera.get('duracion')?.value != '')">
+                </form>
+
+                <div>
+                        <h2>Lista carreras</h2>
+                </div>
+
+                <div>
+                        <select class="form-select listaCarreras" name="selectDeLascarreras">
+                                <option value="" disabled selected>Carreras</option>
+                                <!-- <option *ngFor="let carrera of listaCarreras" [ngValue]="carrera" [style.color]="carrera.activa ? 'black' : ' #ff0000'">{{carrera.nombre}}</option>
+                                <option *ngFor="let carrera of listaCarreras" [ngValue]="carrera" [style.color]="carrera.activa ? 'green' : '#ff0000'" [style.font-weight]="'bold'">{{carrera.nombre}} 
+                                </option>-->
+                        </select>
+
+                        <div class="botonesCarrera">
+                                <input type="submit" class="btn btn-success" value="Activar" (click)="activarCarrera()">
+                                <input type="submit" class="btn btn-warning" value="Desactivar" (click)="desactivarCarrera()" name="" id="">
+                        </div>
+                </div>
+        </div>
+</div>
+<app-footer></app-footer>

@@ -20,7 +20,10 @@ import { AlertasService } from '../servicios/alertas.service';
   styleUrls: ['./agregar-institucion.component.css']
 })
 export class AgregarInstitucionComponent implements OnInit {
-  constructor(private servicioCalificaciones: ServicioCalificacionesService, private universidadService: UniversidadServiceService, private router: Router, private servicioComentario: ComentarioService, private carreraService: CarreraService, private route: ActivatedRoute, private alertas: AlertasService) { }
+  constructor(private servicioCalificaciones: ServicioCalificacionesService,
+    private universidadService: UniversidadServiceService, private router: Router,
+    private servicioComentario: ComentarioService, private carreraService: CarreraService,
+    private route: ActivatedRoute, private alertas: AlertasService) { }
 
   // imagenCargadaCorrectamente: boolean = false;
   imagenUrl: String = "";
@@ -41,9 +44,6 @@ export class AgregarInstitucionComponent implements OnInit {
   idDeUniversidadEditada: number = 0;
   carreraSeleccionada: Carrera;
   propiedadActivaCarrera: boolean;
-
-
-
 
   cargarImagenAlTeclear(event: Event) {
     this.imagenUrl = (<HTMLInputElement>event.target).value;
@@ -188,7 +188,7 @@ export class AgregarInstitucionComponent implements OnInit {
   }
 
   validacionFormulario(): boolean {
-    if (this.nombre && this.nombre.length >= 4 && this.imagen && this.descripcion && this.descripcion.length > 9 && this.direccion && this.direccion.length > 8 && this.direccionWeb && this.direccionWeb.length > 8 ) {
+    if (this.nombre && this.nombre.length >= 4 && this.imagen && this.descripcion && this.descripcion.length > 9 && this.direccion && this.direccion.length > 8 && this.direccionWeb && this.direccionWeb.length > 8) {
       return false;
     } else {
       return true;

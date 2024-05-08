@@ -63,7 +63,7 @@ export class AgregarUniversidadMultiPasosComponent implements OnInit {
     let universidad: Universidad = new Universidad();
     universidad.setNombre(this.formularioAltaUniversidad.get('nombre')?.value);
     universidad.setDireccionWeb(this.formularioAltaUniversidad.get('direccionWeb')?.value);
-    universidad.setDireccion(this.formularioAltaUniversidad.get('gradoCarrera')?.value);
+    universidad.setDireccion(this.formularioAltaUniversidad.get('direccionFisica')?.value);
     universidad.setDescripcion(this.formularioAltaUniversidad.get('descripcion')?.value);
     universidad.setImagen(this.imagenPorDefecto);
     universidad.setListaCarreras(this.listaCarrerasUniversidad);

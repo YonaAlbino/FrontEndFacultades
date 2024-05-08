@@ -46,7 +46,7 @@ export class DetalleComponent implements OnInit {
 
 
 
-  constructor(private uniService: UniversidadServiceService, private route: ActivatedRoute, private comentarioService: ComentarioService, private respuetaService: RespuestaService, private router: Router, private carreraService: CarreraService, private alertas:AlertasService) { }
+  constructor(private uniService: UniversidadServiceService, private route: ActivatedRoute, private comentarioService: ComentarioService, private respuetaService: RespuestaService, private router: Router, private carreraService: CarreraService, private alertas: AlertasService) { }
 
 
   ngOnInit(): void {
@@ -84,7 +84,8 @@ export class DetalleComponent implements OnInit {
       const universidad = await this.uniService
         .buscarUniversdiad(id)
         .toPromise();
-      this.universidad = universidad;
+      if (universidad)
+        this.universidad = universidad;
     } catch (error) {
       console.error('Error al obtener el producto:', error);
     }
@@ -105,7 +106,7 @@ export class DetalleComponent implements OnInit {
   }
 
 
-  crearNuevoComentario(mensaje:string): Observable<Comentario> {
+  crearNuevoComentario(mensaje: string): Observable<Comentario> {
     let nuevoComentario: Comentario = new Comentario();
     nuevoComentario.mensaje = mensaje;
     return this.comentarioService.guardarComentario(nuevoComentario);
@@ -130,7 +131,7 @@ export class DetalleComponent implements OnInit {
     }
   }
 
-  agregarNuevoComentario(mensaje:string) {
+  agregarNuevoComentario(mensaje: string) {
     this.variableDeEjemplo = false;
     this.crearNuevoComentario(mensaje).subscribe(
       (comentario: Comentario) => {
